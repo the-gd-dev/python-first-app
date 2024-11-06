@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block head %}
+<title>Tasks Todo</title>
+{% endblock %}
+
+{% block body %}
+<div class="container pt-5">
+    <form class="p-4" action="/" method="post">
+        <div class="row">
+            <div class="col-12 col-sm-9">
+                <div class="form-group">
+                    <input required type="text" class="form-control" name="content" placeholder="What I have to do ?"/>
+                </div>
+            </div>
+            <div class="col-12 col-sm-3 pt-2 pt-sm-0">
+                <button class="btn btn-block w-100 btn-success">+ Add Task</button>
+            </div>
+        </div>
+    </form>
+    <div class="p-4">
+        {% for task in tasks %}
+        <div class="card px-4 py-2 mt-2 overflow-hidden">
+            <div class="row">
+                <div class="col-9 col-md-10 text-dark fw-semibold pt-1">{{task.content}}</div>
+                <div class="col-3 col-md-2">
+                    <div class="btn-group pt-2 pt-md-0">
+                        <a href="/update/{{task.id}}" class="btn btn-sm btn-primary">Edit</a>
+                        <form action="/delete" method="post">
+                            <input type="hidden" name="id" value="{{task.id}}">
+                            <button class="btn btn-sm btn-danger">Delete</button>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% endblock %}
