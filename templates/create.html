@@ -4,36 +4,59 @@
 {% endblock %}
 
 {% block body %}
-<div class="container pt-5">
-    <form class="p-4" action="/" method="post">
-        <div class="row">
-            <div class="col-12 col-sm-9">
-                <div class="form-group">
-                    <input required type="text" class="form-control" name="content" placeholder="What I have to do ?"/>
-                </div>
-            </div>
-            <div class="col-12 col-sm-3 pt-2 pt-sm-0">
-                <button class="btn btn-block w-100 btn-success">+ Add Task</button>
-            </div>
-        </div>
-    </form>
-    <div class="p-4">
-        {% for task in tasks %}
-        <div class="card px-4 py-2 mt-2 overflow-hidden">
+<div class="row">
+    <div class="col-12 col-md-8 col-lg-6 col-xl-4 mx-auto mt-5">
+        <form class="p-4" action="/" method="post">
             <div class="row">
-                <div class="col-9 col-md-10 text-dark fw-semibold pt-1">{{task.content}}</div>
-                <div class="col-3 col-md-2">
-                    <div class="btn-group pt-2 pt-md-0">
-                        <a href="/update/{{task.id}}" class="btn btn-sm btn-primary">Edit</a>
-                        <form action="/delete" method="post">
-                            <input type="hidden" name="id" value="{{task.id}}">
-                            <button class="btn btn-sm btn-danger">Delete</button>
-                        </form>
-
+                <div class="col-12">
+                    <div class="form-group">
+                        <input required type="text" class="form-control" name="task_title"
+                               placeholder="e.g. Coffe Break!"/>
+                    </div>
+                    <div class="form-group my-2">
+                    <textarea required class="form-control" name="task_description"
+                              placeholder="e.g. Grab a Low Sugar Coffee"></textarea>
+                    </div>
+                    <div class="form-group mb-2">
+                        <input required type="date" class="form-control" name="task_date"/>
                     </div>
                 </div>
+                <div class="col-12  col-md-4 col-lg-3 offset-x-4 pt-2 pt-sm-0 ms-auto">
+                    <button class="btn btn-sm btn-block w-100 btn-success">+ Add Task</button>
+                </div>
             </div>
+        </form>
+        <div class="p-4">
+            {% for task in tasks %}
+            <div class="card mt-2 overflow-hidden p-0">
+                <div class="d-flex justify-content-between align-items-center card-header py-2">
+                    <h6 class=" text-dark">{{task.title}}</h6>
+                    <small class="text-muted fs-7">{{task.todo_date}}</small>
+                </div>
+
+                <p class="text-secondary px-3 py-2">
+                    {{task.description}}
+                </p>
+
+                <div class="px-3 py-2 d-flex">
+                    <a href="/update/{{task.id}}" class="btn btn-sm btn-primary">Edit</a>
+                    <form action="/delete" method="post" onsubmit="delete">
+                        <input type="hidden" name="id" value="{{task.id}}">
+                        <button class="btn btn-sm btn-danger ms-2">Delete</button>
+                    </form>
+                </div>
+            </div>
+            {% endfor %}
         </div>
-        {% endfor %}
     </div>
-    {% endblock %}
+</div>
+<script>
+    function delete(){
+    console.log("asdfhasdfasd")
+        if(confirm("Are")) {
+            return true;
+        }
+        return false
+    }
+</script>
+{% endblock %}

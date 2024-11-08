@@ -4,18 +4,29 @@
 {% endblock %}
 
 {% block body %}
-<div class="container pt-5">
-    <form class="p-4" action="/update/{{task.id}}" method="post">
-        <div class="row">
-            <div class="col-12 col-sm-9">
-                <div class="form-group">
-                    <input type="text" class="form-control" name="content" value="{{task.content}}" placeholder="What I have to do ?"/>
+<div class="row">
+    <div class="col-12 col-md-6 mx-auto mt-4">
+        <form class="p-4" action="/update/{{task.id}}" method="post">
+            <div class="row">
+                <div class="col-12">
+                    <div class="form-group">
+                        <input required type="text" value="{{task.title}}" class="form-control" name="task_title"
+                               placeholder="e.g. Coffe Break!"/>
+                    </div>
+                    <div class="form-group my-2">
+                    <textarea required class="form-control" name="task_description"
+                              placeholder="e.g. Grab a Low Sugar Coffee">{{task.description}}</textarea>
+                    </div>
+                    <div class="form-group mb-2">
+                        <input required value="{{task.todo_date}}" type="date" class="form-control" name="task_date"/>
+                    </div>
+                </div>
+                <div class="col-12  col-md-6 col-lg-4 offset-x-4 pt-2 pt-sm-0 ms-auto">
+                    <button class="btn btn-sm btn-block w-100 btn-success">Update Task</button>
                 </div>
             </div>
-            <div class="col-12 col-sm-3 pt-2 pt-sm-0">
-                <button class="btn btn-block w-100 btn-success">Update</button>
-            </div>
-        </div>
-    </form>
+        </form>
+
+    </div>
 </div>
 {% endblock %}
